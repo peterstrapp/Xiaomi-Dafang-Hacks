@@ -62,3 +62,8 @@ firmware_mod/config/userscripts/motiondetection/*
 firmware_mod/config/userscripts/startup/*
 !firmware_mod/config/userscripts/startup/*.dist
 firmware_mod/root/.ssh/*
+firmware_mod/root/.ash_history
+firmware_mod/etc
+firmware_mod/log
+firmware_mod/config/dropbear_ecdsa_host_key
+firmware_mod/config/dropbear_rsa_host_key

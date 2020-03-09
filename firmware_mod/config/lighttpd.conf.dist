@@ -60,6 +60,10 @@ $HTTP["url"] !~ "^/.well-known/(.*)" {
     }
 }
 
+$HTTP["url"] =~ "^/DCIM/Motion($|/)" {
+    dir-listing.activate = "enable"
+}
+
 ## enable debugging
 #debug.log-request-header     = "enable"
 #debug.log-response-header    = "enable"
