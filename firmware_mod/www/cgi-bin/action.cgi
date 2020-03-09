@@ -568,6 +568,12 @@ auto_night_mode_status)
 	  return
 	  ;;
 
+  download_configuration)
+    cd /system/sdcard
+    tar -zcvf - config/
+    return
+    ;;
+
   motion_detection_mail_on)
 	  motion_send_mail on
 	  return

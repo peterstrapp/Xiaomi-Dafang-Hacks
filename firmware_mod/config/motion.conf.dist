@@ -9,7 +9,7 @@ debug_msg_enable=false
 
 region_of_interest=0,0,1280,720
 motion_sensitivity=2
-motion_indicator_color=2
+motion_indicator_color=-1
 motion_timeout=-1
 motion_detection=on
 motion_tracking=off
@@ -28,7 +28,7 @@ send_matrix=false
 # General
 group_date_pattern="+%Y-%m-%d/%H"
 file_date_pattern="+%Y-%m-%d_%H-%M-%S"
-video_duration=10
+video_duration=20
 save_files_attr="0644"
 save_dirs_attr="0755"
 
@@ -45,7 +45,7 @@ save_snapshot_dir=/system/sdcard/DCIM/Motion/Stills
 max_snapshot_days=20
 
 # Videos
-save_video=false
+save_video=true
 save_video_dir=/system/sdcard/DCIM/Motion/Videos
 max_video_days=10
 

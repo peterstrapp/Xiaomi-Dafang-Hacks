@@ -1,0 +1,84 @@
+<html>
+    <body>
+
+<script type="text/javascript">
+    function download() {
+        document.querySelector('#download').disabled = true;
+
+        fetch('/cgi-bin/action.cgi?cmd=download_configuration')
+            .then(resp => resp.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'config.tar.gz';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(() => alert('Download failed'));
+
+            document.querySelector('#download').disabled = false;
+    }
+
+    function upload() {
+        var uploadconfig = document.querySelector('#uploadconfig');
+        uploadFile(uploadconfig.files[0]);
+    }
+
+    function uploadFile(file) {
+        var reader = new FileReader();
+
+        reader.onload = function(readerEvt) {
+            var binaryString = readerEvt.target.result;
+
+            var formData = new FormData();
+            formData.append("upload_file", btoa(binaryString));
+            fetch('/cgi-bin/config.cgi', {method: "POST", body: formData});
+        };
+
+        reader.readAsBinaryString(file);
+    }
+
+    $(document).ready(function() {
+        document.querySelector('#upload').disabled = true;
+
+        var uploadconfig = document.querySelector('#uploadconfig');
+        uploadconfig.addEventListener('change', function () {
+            document.querySelector('#upload').disabled = !(this.files.length > 0);
+        }, false);
+    });
+</script>
+
+<div class='card status_card'>
+    <header class='card-header'>
+        <p class='card-header-title'>Backup/Restore configuraton</p>
+    </header>
+    <div class='card-content'>
+        <div class="field is-horizontal">
+            <p>Download a backup of the current configuration or upload a configuration archive.</p>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input id="download" class="button is-primary" type="submit" value="Download configuration" onclick="download()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+	<div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="file" id="uploadconfig" />
+                        <input id="upload" class="button is-primary" type="submit" value="Upload configuration" onclick="upload()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
